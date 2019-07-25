@@ -22,7 +22,7 @@ const AddProductModal = props => {
           let newProduct = { ...product }
           let val = e.target.value
           if (key === "id" || key === "regular_price_in_cents") {
-            val = val ? parseInt(val.replace(/[^0-9.]/g, "")) : val
+            val = Number(val.replace(/[^0-9.]/g, ""))
           }
           newProduct[key] = val
           setProduct(newProduct)

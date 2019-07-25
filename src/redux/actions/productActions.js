@@ -1,22 +1,8 @@
 export const addProduct = product => {
-  const {
-    id,
-    name,
-    primary_category,
-    product_package,
-    regular_price_in_cents
-  } = product
-
   return {
     type: "CREATE_PRODUCT_SUCCESS",
     payload: {
-      product: {
-        id: id.parseInt,
-        name,
-        primary_category,
-        product_package,
-        regular_price_in_cents
-      }
+      product
     }
   }
 }
