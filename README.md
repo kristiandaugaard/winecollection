@@ -7,7 +7,7 @@ This is a project for IMPACT
 The app was created using an ejected Create React App. So the installation is very simple.
 
 ```
-git clone
+git clone https://github.com/kristiandaugaard/winecollection.git
 cd winecollection
 npm i
 npm start

@@ -7,7 +7,6 @@ import {
   changeSortList,
   filterProductList
 } from "../../redux/actions/productActions"
-// import axios from 'axios'
 import AddModal from "./AddProductModal"
 
 export const lcboImg = id =>
@@ -60,16 +59,6 @@ function ProductList(props) {
     max: expensiveProduct.regular_price_in_cents / 100
   })
 
-  useEffect(() => {
-    // const fetchProducts = async () => {
-    //   const data = await axios.get("http://localhost:3000/products")
-    //   if (!data) return
-    //   const products = await data.json()
-    //   console.log(data)
-    // }
-    // fetchProducts()
-  }, [])
-
   const [filter, setFilter] = useState("")
   const [filterTimeout, setFilterTimeout] = useState(0)
   const doFilter = string => {
@@ -105,19 +94,23 @@ function ProductList(props) {
     </th>
   ))
 
+  const includeFilterText = product => {
+    return filter
+      ? product.name.toLowerCase().includes(filter.toLowerCase()) ||
+          `${product.id}`.toLowerCase().includes(filter.toLowerCase())
+      : true
+  }
+
+  const filterPriceByRange = ({ regular_price_in_cents }) => {
+    return (
+      regular_price_in_cents / 100 >= priceSlider.min &&
+      regular_price_in_cents / 100 <= priceSlider.max
+    )
+  }
+
   const tabledata = products
-    .filter(product => {
-      return filter
-        ? product.name.toLowerCase().includes(filter.toLowerCase()) ||
-            `${product.id}`.toLowerCase().includes(filter.toLowerCase())
-        : true
-    })
-    .filter(product => {
-      return (
-        product.regular_price_in_cents / 100 >= priceSlider.min &&
-        product.regular_price_in_cents / 100 <= priceSlider.max
-      )
-    })
+    .filter(includeFilterText)
+    .filter(filterPriceByRange)
     .map((product, i) => (
       <tr
         key={i}

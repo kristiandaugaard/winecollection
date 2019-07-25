@@ -1,7 +1,26 @@
 .table
     &__header
-        &--sortable
+        &-sorter
+            position: relative
             cursor: pointer
+
+            &:before
+                content: ""
+                display: inline-block
+                position: absolute
+                top: 50%
+                right: 1em
+                border: 0.25em solid transparent
+                width: 0
+                height: 0
+
+            &--asc:before
+                border-top-color: #333
+                transform: translateY(-50%)
+
+            &--desc:before
+                border-bottom-color: #333
+                transform: translateY(-50%)
 
     &__row
         &--link
